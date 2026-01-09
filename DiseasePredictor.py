@@ -102,14 +102,17 @@ def render():
     # Main input UI
     st.markdown(" Describe your symptoms")
 
-
+    # Initialize user_input from session state if available (for speech recognition)
+    
 
     # Text area for manual input or display recognized speech
     user_input = st.text_area(
-        "Enter your symptoms or edit recognized speech:",
-        value=user_input,  # Pre-fill with recognized speech if any
+        "Enter your symptoms",
         height=100
     )
+    
+    # Update session state with current input
+    st.session_state.user_input = user_input
     single_symptom_rules = {
         "fever": ("Fever", "Take complete rest, drink fluids, and monitor temperature."),
         "headache": ("Headache", "Rest in a quiet room, hydrate well, reduce screen time."),
@@ -175,7 +178,3 @@ def render():
                 care = data[data["disease"] == prediction]["care_instructions"].iloc[0]
                 st.success(f"🧾 Possible Condition: **{prediction}**")
                 st.info("Basic Care Guidance: " + care)
-    
-
-    
-  
