@@ -11,6 +11,7 @@ import re
 
 
 def render():
+    pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
     heart_data = pd.read_csv('./data/heart.csv')
     patients_data = heart_data.drop(columns='target', axis=1)
     disease_prediction = heart_data['target']
